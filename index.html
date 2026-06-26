@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Md Jihadur Rahaman - Live Stream</title>
+    <style>
+        /* বেসিক রিসেট ও ব্যাকগ্রাউন্ড */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #0d1117;
+            background: radial-gradient(circle, #161b22 0%, #0d1117 100%);
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* কন্টেইনার */
+        .container {
+            width: 100%;
+            max-width: 900px;
+            text-align: center;
+        }
+
+        /* হেডার ও নাম */
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.6), 0 0 20px rgba(56, 189, 248, 0.4);
+            margin-bottom: 5px;
+        }
+        .hashtag {
+            color: #00aeef;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        /* লাইভ ব্যাজ */
+        .live-badge {
+            background-color: #dc2626;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 4px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(220, 38, 38, 0.5);
+        }
+        .live-badge::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: white;
+            border-radius: 50%;
+            animation: blink 1.5s infinite;
+        }
+
+        /* ভিডিও প্লেয়ার কন্টেইনার */
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: #000000;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 25px;
+            aspect-ratio: 16 / 9;
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* স্ট্রিম বাটন সেকশন (২-কলাম গ্রিড) */
+        .stream-buttons-2col {
+            margin: 20px auto;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .btn-row {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+        .stream-btn-2col {
+            flex: 1;
+            background: #1f2937;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        .stream-btn-2col:hover {
+            background: #2563eb;
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(37, 99, 235, 0.4);
+        }
+        /* অ্যাক্টিভ বাটনের স্টাইল */
+        .stream-btn-2col.active {
+            background: #2563eb;
+            border-color: #60a5fa;
+            box-shadow: 0 0 10px rgba(37, 99, 235, 0.6);
+        }
+
+        /* লিঙ্কডইন বাটন */
+        .btn-linkedin {
+            display: inline-block;
+            background: linear-gradient(180deg, #0077b5 0%, #005987 100%);
+            color: white;
+            text-decoration: none;
+            padding: 10px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 15px rgba(0, 119, 181, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 15px;
+        }
+        .btn-linkedin:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 119, 181, 0.6);
+        }
+
+        /* ফুটার */
+        .footer {
+            margin-top: 30px;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.3);
+            letter-spacing: 0.5px;
+        }
+
+        /* অ্যানিমেশন */
+        @keyframes blink {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+
+        /* মোবাইল রেসপনসিভ */
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.8rem; }
+            .btn-row { flex-direction: column; gap: 8px; }
+            .stream-btn-2col { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>Md Jihadur Rahaman</h1>
+            <div class="hashtag">#SupportingBrazil 🇧🇷</div>
+            <div class="live-badge">LIVE</div>
+        </div>
+
+        <!-- ভিডিও প্লেয়ার প্লেসহোল্ডার (iframe) -->
+        <div class="video-wrapper">
+            <iframe 
+                id="main-player"
+                src="https://cricfy.top/tolive/play.php?id=6a3ec65c1de06" 
+                allow="autoplay; encrypted-media; fullscreen" 
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <!-- আপনার দেওয়া বাটন সেকশনটি এখানে ইন্টিগ্রেট করা হয়েছে -->
+        <div class="stream-buttons-2col">    
+            <div class="btn-row">        
+                <div class="stream-btn-2col" onclick="changeIframe('https://cricfy.top/tolive/play.php?id=6a3d7d14a0d78', this)">            
+                    Cazetv AQ        
+                </div>            
+                <div class="stream-btn-2col" onclick="changeIframe('https://cricfy.top/tolive/play.php?id=6a3c67a2e14af', this)">            
+                    Fox sports         
+                </div>    
+            </div>
+            <div class="btn-row">        
+                <div class="stream-btn-2col" onclick="changeIframe('https://cricfy.top/tolive/play.php?id=6a3c675242d0b', this)">            
+                    TSN SPORTS         
+                </div>            
+                <div class="stream-btn-2col active" onclick="changeIframe('https://cricfy.top/tolive/play.php?id=6a3ec65c1de06', this)">            
+                    D Sports AQ        
+                </div>    
+            </div>
+            <div class="btn-row">        
+                <div class="stream-btn-2col" onclick="changeIframe('https://bokul-cdn.primesports.top/play2.php?id=https://storage.googleapis.com/bluejaysx/sportnet/manifest.m3u8', this)">            
+                    I Phone        
+                </div>    
+            </div>
+        </div>  
+
+        <a href="https://www.linkedin.com" target="_blank" class="btn-linkedin">LinkedIn</a>
+
+        <div class="footer">
+            &copy; 2026 Md Jihadur Rahaman
+        </div>
+    </div>
+
+    <!-- জাভাস্ক্রিপ্ট ফাংশন যা ক্লিক করলে ভিডিও বদল করবে -->
+    <script>
+        function changeIframe(url, buttonElement) {
+            // iframe এর src পরিবর্তন করা
+            document.getElementById('main-player').src = url;
+
+            // আগের অ্যাক্টিভ বাটনের স্টাইল রিমুভ করে নতুন বাটনে স্টাইল দেওয়া
+            const buttons = document.querySelectorAll('.stream-btn-2col');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            if(buttonElement) {
+                buttonElement.classList.add('active');
+            }
+        }
+    </script>
+
+</body>
+</html>
