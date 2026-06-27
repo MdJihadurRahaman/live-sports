@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Md Jihadur Rahaman - Live Stream</title>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <style>
-        /* কালার প্যালেট ও গ্লোবাল স্টাইল */
         :root {
             --bg-color: #0b0f19;
             --card-bg: #111827;
@@ -26,9 +26,9 @@
             justify-content: center;
             min-height: 100vh;
             box-sizing: border-box;
+            padding: 20px;
         }
 
-        /* হেডার ও নাম */
         .header-container {
             text-align: center;
             margin-bottom: 25px;
@@ -39,11 +39,9 @@
             font-weight: 700;
             margin: 0 0 8px 0;
             letter-spacing: 0.5px;
-            /* টেক্সট গ্লো ইফেক্ট */
             text-shadow: 0 0 10px var(--accent-glow), 0 0 20px var(--accent-glow);
         }
 
-        /* হ্যাশট্যাগ ও ব্রাসিল SVG লোগো */
         .hashtag-container {
             display: flex;
             align-items: center;
@@ -62,7 +60,6 @@
             vertical-align: middle;
         }
 
-        /* লাইভ ব্যাজ */
         .live-badge {
             background-color: var(--live-red);
             color: white;
@@ -96,42 +93,21 @@
 
         /* ভিডিও প্লেয়ার কন্টেইনার */
         .player-wrapper {
-            width: 90%;
+            width: 100%;
             max-width: 900px;
-            background-color: var(--card-bg);
+            background-color: #000;
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
             border: 1px solid rgba(255, 255, 255, 0.05);
+            aspect-ratio: 16 / 9; /* ভিডিওর স্ট্যান্ডার্ড রেশিও */
         }
 
-        /* আইফ্রেম রেসপনসিভনেস নিশ্চিত করা */
-        .iframe-container {
-            position: relative;
-            width: 100%;
-            height: 500px; /* আপনার রিকোয়ার্ড হাইট */
-            background-color: #000;
-        }
-
-        .iframe-container iframe {
-            border: 0;
+        video {
             width: 100%;
             height: 100%;
-        }
-
-        /* মোবাইল ফ্রেন্ডলি রেসপনসিভ ডিজাইন */
-        @media (max-width: 768px) {
-            .user-name {
-                font-size: 1.8rem;
-            }
-            .iframe-container {
-                height: 350px; /* ছোট স্ক্রিনের জন্য হাইট কিছুটা কমানো হলো */
-            }
-        }
-        @media (max-width: 480px) {
-            .iframe-container {
-                height: 240px;
-            }
+            display: block;
+            object-fit: contain;
         }
     </style>
 </head>
@@ -159,10 +135,34 @@
     </div>
 
     <div class="player-wrapper">
-        <div class="iframe-container">
-            <iframe src="//cdn.stmify.com/embed-free/v1/tsn-1-ca-jw" width="100%" height="500px" marginheight="0" marginwidth="0" scrolling="no" frameborder="0" allowfullscreen allow="encrypted-media"></iframe>
-        </div>
+        <video id="video" controls autoplay muted playsinline></video>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const video = document.getElementById('video');
+            // আপনার দেওয়া HLS (.m3u8) স্ট্রিমিং লিংক
+            const videoSrc = 'https://prod-cdn01-live.toffeelive.com/live/FIFA-2026/0/master_1750.m3u8';
+
+            if (Hls.isSupported()) {
+                const hls = new Hls({
+                    maxMaxBufferLength: 10 // লাইভ স্ট্রিমের বাফারিং স্মুথ রাখার জন্য
+                });
+                hls.loadSource(videoSrc);
+                hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                    video.play();
+                });
+            }
+            // কিছু ব্রাউজারে (যেমন আইফোন/ম্যাক এর Safari) HLS নেটিভভাবেই সাপোর্ট করে
+            else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                video.src = videoSrc;
+                video.addEventListener('loadedmetadata', function() {
+                    video.play();
+                });
+            }
+        });
+    </script>
 
 </body>
 </html>
