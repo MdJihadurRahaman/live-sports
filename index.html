@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Md Jihadur Rahaman - Live Stream (Method 2)</title>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clappr@latest/dist/clappr.min.js"></script>
+    <title>Md Jihadur Rahaman - Live Stream (Method 1)</title>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <style>
         :root {
             --bg-color: #0b0f19;
@@ -18,7 +18,8 @@
         .user-name { font-size: 2.2rem; font-weight: 700; margin: 0 0 8px 0; text-shadow: 0 0 10px var(--accent-glow); }
         .hashtag { color: #38bdf8; font-size: 1.1rem; font-weight: 600; margin-bottom: 15px; }
         .live-badge { background-color: var(--live-red); color: white; font-size: 0.75rem; font-weight: bold; padding: 4px 12px; border-radius: 12px; text-transform: uppercase; margin-bottom: 20px;}
-        #player { width: 100%; max-width: 900px; aspect-ratio: 16/9; border-radius: 12px; overflow: hidden; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3); }
+        .player-wrapper { width: 100%; max-width: 900px; background-color: #000; border-radius: 12px; overflow: hidden; aspect-ratio: 16 / 9; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.05); }
+        video { width: 100%; height: 100%; display: block; object-fit: contain; }
     </style>
 </head>
 <body>
@@ -26,18 +27,32 @@
     <h1 class="user-name">Md Jihadur Rahaman</h1>
     <div class="hashtag">#SupportingBrazil</div>
     <div class="live-badge">Live</div>
-    
-    <div id="player"></div>
+
+    <div class="player-wrapper">
+        <video id="video" controls autoplay muted playsinline></video>
+    </div>
 
     <script>
-        var player = new Clappr.Player({
-            source: "https://prod-cdn01-live.toffeelive.com/live/FIFA-2026/0/master_1750.m3u8",
-            parentId: "#player",
-            width: "100%",
-            height: "100%",
-            autoPlay: true,
-            mute: true, // ব্রাউজার পলিসির জন্য অটো-প্লে করতে মিউট রাখা জরুরি
-            mimeType: "application/x-mpegURL"
+        document.addEventListener('DOMContentLoaded', () => {
+            const video = document.getElementById('video');
+            const originalSrc = 'https://prod-cdn01-live.toffeelive.com/live/FIFA-2026/0/master_1750.m3u8';
+            
+            // CORS প্রক্সি যুক্ত করা হলো
+            const videoSrc = 'https://cors-anywhere.herokuapp.com/' + originalSrc;
+
+            if (Hls.isSupported()) {
+                const hls = new Hls({ maxMaxBufferLength: 10 });
+                hls.loadSource(videoSrc);
+                hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                    video.play();
+                });
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                video.src = videoSrc;
+                video.addEventListener('loadedmetadata', function() {
+                    video.play();
+                });
+            }
         });
     </script>
 </body>
