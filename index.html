@@ -2,346 +2,230 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Md Jihadur Rahaman Live</title>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<title>Md Jihadur Rahaman Live</title>
+        body {
+            background: #0d1117;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            min-height: 100vh;
+        }
 
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+        /* Real-time Clock Style */
+        #clock {
+            font-size: 14px;
+            color: #00eaff;
+            margin-top: 15px;
+            font-family: monospace;
+        }
 
+        h1 {
+            margin-top: 10px;
+            font-size: 36px;
+            text-shadow: 0 0 20px #00eaff;
+            letter-spacing: 1px;
+        }
 
-<style>
+        .sub {
+            margin-top: 10px;
+            font-size: 18px;
+            color: #00eaff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+        /* Pulse Animation for Live Button */
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255, 0, 0, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
+        }
 
-body{
-background:#0d1117;
-color:white;
-font-family:Arial,sans-serif;
-text-align:center;
-min-height:100vh;
-}
+        .live {
+            display: inline-block;
+            margin: 20px;
+            background: red;
+            padding: 8px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
 
+        .player {
+            width: 95%;
+            max-width: 900px;
+            margin: 20px auto;
+            background: black;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid #30363d;
+        }
 
-h1{
-margin-top:25px;
-font-size:40px;
-text-shadow:0 0 20px #00eaff;
-}
+        video {
+            width: 100%;
+            display: block;
+        }
 
+        .controls-area {
+            margin: 20px;
+        }
 
-.sub{
-margin-top:10px;
-font-size:20px;
-color:#00eaff;
-display:flex;
-justify-content:center;
-align-items:center;
-gap:8px;
-}
+        button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            background: #2563eb;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
 
+        button:hover {
+            background: #00aaff;
+            transform: translateY(-2px);
+        }
 
-.live{
-display:inline-block;
-margin:20px;
-background:red;
-padding:8px 25px;
-border-radius:30px;
-font-weight:bold;
-box-shadow:0 0 20px red;
-}
+        .status {
+            margin: 10px;
+            color: #8b949e;
+            font-size: 14px;
+        }
 
+        /* LinkedIn Branding Section */
+        .linkedin-footer {
+            margin: 40px auto;
+            padding: 20px;
+            background: #161b22;
+            border-top: 2px solid #0077b5;
+            width: 100%;
+            position: relative;
+        }
 
+        .linkedin-card {
+            display: inline-flex;
+            align-items: center;
+            background: #0077b5;
+            padding: 10px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 119, 181, 0.3);
+        }
 
-.player{
+        .linkedin-card:hover {
+            background: #00a0dc;
+            box-shadow: 0 6px 20px rgba(0, 119, 181, 0.5);
+        }
 
-width:90%;
-max-width:1000px;
-margin:20px auto;
-background:black;
-border-radius:15px;
-overflow:hidden;
-box-shadow:0 0 25px black;
+        .linkedin-card i {
+            font-size: 20px;
+            margin-right: 10px;
+        }
 
-}
+        .profile-id {
+            display: block;
+            margin-top: 10px;
+            color: #58a6ff;
+            font-size: 14px;
+        }
 
-
-video{
-
-width:100%;
-height:auto;
-display:block;
-background:black;
-
-}
-
-
-
-button{
-
-margin:20px;
-padding:14px 35px;
-border:none;
-border-radius:10px;
-background:#2563eb;
-color:white;
-font-size:17px;
-cursor:pointer;
-
-}
-
-
-button:hover{
-background:#00aaff;
-}
-
-
-.status{
-margin:15px;
-color:#aaa;
-}
-
-
-.footer{
-
-margin-top:30px;
-display:inline-block;
-background:#0088cc;
-padding:12px 45px;
-border-radius:30px;
-
-}
-
-</style>
-
+    </style>
 </head>
-
 
 <body>
 
-
-<h1>
-Md Jihadur Rahaman
-</h1>
-
-
-
-<div class="sub">
-
-
-<svg 
-width="38"
-height="25"
-viewBox="0 0 36 24"
-xmlns="http://www.w3.org/2000/svg">
-
-
-<rect width="36" height="24" fill="#009c3b"/>
-
-<polygon
-points="18,3 33,12 18,21 3,12"
-fill="#ffdf00"/>
-
-<circle
-cx="18"
-cy="12"
-r="5"
-fill="#002776"/>
-
-<path
-d="M14 11.5c2.5-1.5 5.5-1.5 8 0"
-stroke="white"
-stroke-width="0.7"
-fill="none"/>
-
-</svg>
-
-
-<span>
-#SupportingBrazil
-</span>
-
-
-</div>
-
-
-
-<div class="live">
-● LIVE
-</div>
-
-
-
-
-<div class="player">
-
-
-<video
-id="video"
-controls
-autoplay
-muted
-playsinline>
-
-</video>
-
-
-</div>
-
-
-
-
-<button onclick="playStream()">
-
-ONE CLICK PLAY
-
-</button>
-
-
-
-<div class="status" id="status">
-Connecting...
-</div>
-
-
-
-<div class="footer">
-LinkedIn
-</div>
-
-
-
-
-
-<script>
-
-
-const video =
-document.getElementById("video");
-
-
-const status =
-document.getElementById("status");
-
-
-
-const stream =
-
-"https://prod-cdn01-live.toffeelive.com/live/FIFA-2026-2/0/master_3000.m3u8?hdntl=Expires=1782667986~_GO=Generated~URLPrefix=aHR0cHM6Ly9wcm9kLWNkbjAxLWxpdmUudG9mZmVlbGl2ZS5jb20~Signature=AVXEwvc37dFUKGbQ0dUdyGFB9e8j-pC4-UVmGLize49cKF1QHePFJ7ZhXcBlcL7j6OUeKfpDZr_4ITmtn-YUkJb8GMMM";
-
-
-let hls;
-
-
-
-function playStream(){
-
-
-if(hls){
-hls.destroy();
-}
-
-
-
-if(Hls.isSupported()){
-
-
-hls = new Hls({
-
-enableWorker:true,
-
-lowLatencyMode:true,
-
-liveSyncDurationCount:3,
-
-maxBufferLength:10
-
-});
-
-
-
-hls.loadSource(stream);
-
-hls.attachMedia(video);
-
-
-
-hls.on(
-Hls.Events.MANIFEST_PARSED,
-()=>{
-
-
-status.innerHTML="LIVE Connected";
-
-
-video.play().catch(()=>{
-
-status.innerHTML="Tap Play";
-
-});
-
-
-});
-
-
-
-hls.on(
-Hls.Events.ERROR,
-(event,data)=>{
-
-
-console.log(data);
-
-
-if(data.fatal){
-
-status.innerHTML="Stream Error";
-
-}
-
-});
-
-
-}
-
-
-
-else if(
-video.canPlayType(
-"application/vnd.apple.mpegurl"
-)
-){
-
-
-video.src=stream;
-
-video.play();
-
-
-}
-
-
-}
-
-
-
-
-window.onload=function(){
-
-playStream();
-
-};
-
-
-
-</script>
-
-
-</body>
-
-</html>
+    <!-- Real-time Clock -->
+    <div id="clock">Loading Time...</div>
+
+    <h1>Md Jihadur Rahaman</h1>
+
+    <div class="sub">
+        <!-- Brazil Flag SVG -->
+        <svg width="30" height="20" viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg">
+            <rect width="36" height="24" fill="#009c3b" />
+            <polygon points="18,3 33,12 18,21 3,12" fill="#ffdf00" />
+            <circle cx="18" cy="12" r="5" fill="#002776" />
+        </svg>
+        <span>#SupportingBrazil</span>
+    </div>
+
+    <div class="live">● LIVE</div>
+
+    <div class="player">
+        <video id="video" controls autoplay muted playsinline></video>
+    </div>
+
+    <div class="controls-area">
+        <button onclick="playStream()">
+            <i class="fas fa-sync-alt"></i> Refresh Server
+        </button>
+        <div class="status" id="status">Connecting to secure server...</div>
+    </div>
+
+    <!-- LinkedIn Real-time Branding Section -->
+    <div class="linkedin-footer">
+        <p style="margin-bottom: 15px; color: #8b949e;">Connect with me in real-time</p>
+        <a href="https://www.linkedin.com/in/mdjihadurrahaman" target="_blank" class="linkedin-card">
+            <i class="fab fa-linkedin"></i>
+            Follow /mdjihadurrahaman
+        </a>
+        <span class="profile-id">Verified Professional Profile</span>
+    </div>
+
+    <script>
+        // Real-time Clock Function
+        function updateClock() {
+            const now = new Date();
+            const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            document.getElementById('clock').innerText = "Real-time: " + now.toLocaleDateString('en-US', options);
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Video Player Logic
+        const video = document.getElementById("video");
+        const status = document.getElementById("status");
+        const stream = "https://1nyaler.streamhostingcdn.top/stream/26/index.m3u8";
+        let hls;
+
+        function playStream() {
+            if (hls) {
+                hls.destroy();
+            }
+
+            if (Hls.isSupported()) {
+                hls = new Hls({
+                    enableWorker: true,
+                    lowLatencyMode: true,
+                    liveSyncDurationCount: 3
+                });
+                hls.loadSource(stream);
+                hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED, () => {
+                    status.innerHTML = "<span style='color:#238636'>● System Online - Streaming Live</span>";
+                    video.play().catch(() => {
+                        status.innerHTML = "Tap Play to Start Stream";
+                    });
+                });
+                hls.on(Hls.Events.ERROR, (event, data) => {
+                    if (data.fatal) {
+                        status.innerHTML = "<span style='color:#f85149'>Stream Of
